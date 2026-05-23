@@ -153,7 +153,7 @@ const app = new Hono()
           .setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT!);
         const account = new Account(client);
 
-        await account.updateRecovery(userId, secret, password, password);
+        await account.updateRecovery(userId, secret, password);
         return c.json({ success: true });
       } catch (error) {
         console.error("Failed to reset password", error);
