@@ -88,7 +88,12 @@ export const SignInCard = () => {
                 </FormItem>
               )}
             />
-            <Button disabled={isPending} size="lg" className="w-full">
+            <div className="flex justify-end mt-2">
+              <Link href="/forgot-password">
+                <span className="text-sm text-blue-700 hover:underline">Forgot Password?</span>
+              </Link>
+            </div>
+            <Button disabled={isPending} size="lg" className="w-full mt-4">
               Login
             </Button>
           </form>

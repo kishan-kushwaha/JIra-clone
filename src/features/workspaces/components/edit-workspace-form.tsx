@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeftIcon, CopyIcon, ImageIcon } from "lucide-react";
+import { ArrowLeftIcon, CopyIcon, ImageIcon, MailIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
@@ -118,6 +118,12 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
   const handleCopyInviteLink = () => {
     navigator.clipboard.writeText(fullInviteLink)
       .then(() => toast.success("Invite link copied to clipboard"));
+  };
+
+  const handleSendEmailInvite = () => {
+    const subject = encodeURIComponent(`Join workspace ${initialValues.name}`);
+    const body = encodeURIComponent(`You have been invited to join the workspace "${initialValues.name}".\n\nClick the link below to join:\n${fullInviteLink}`);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -273,6 +279,14 @@ export const EditWorkspaceForm = ({ onCancel, initialValues }: EditWorkspaceForm
                 className="size-12"
               >
                 <CopyIcon className="size-5" />
+              </Button>
+              <Button
+                onClick={handleSendEmailInvite}
+                variant="secondary"
+                className="size-12"
+                title="Send via Email"
+              >
+                <MailIcon className="size-5" />
               </Button>
              </div>
            </div>
